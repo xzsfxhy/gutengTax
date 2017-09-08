@@ -23,6 +23,7 @@ public class InfoAction extends BaseAction{
     private Info info;
     private List<Info> infoList;
     private String[] infoPrivilegeIds;
+    private String i;
 
     //异步发布信息
     public void publicInfo(){
@@ -48,7 +49,8 @@ public class InfoAction extends BaseAction{
     public String listUI() throws Exception {
         //加载权限集合
         ActionContext.getContext().getContextMap().put("infoTypeMap",Info.INFO_TYPE_MAP);
-        //QueryHelper queryHelper=new QueryHelper();
+        QueryHelper queryHelper=new QueryHelper(Info.class,i);
+
         try {
             infoList=infoService.findObjects();
         } catch (Exception e) {
