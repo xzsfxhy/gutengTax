@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--不同的命名空间-->
+    <package name="info-action" namespace="/nsfw" extends="base-default">
+        <!--action的生成不要交给spring容器-->
+        <action name="info_*" class="com.shinemo.nsfw.info.action.infoAction" method="{1}">
+            <result name="{1}">/WEB-INF/jsp/nsfw/info/{1}.jsp</result>
+            <!--这里一定要重定向提交!重定向跳转到列表,防止表单重复提交-->
+            <!--<result name="actionName" type="redirectAction">role_listUI</result>-->
+            <!--这里配置一定要配置正确,result中的result的name值是指的是action中return的值-->
+            <result name="list" type="redirectAction">
+                <param name="actionName">info_listUI</param>
+            </result>
+        </action>
+    </package>
+</struts>

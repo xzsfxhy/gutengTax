@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="slf4j-api-1.6.1-sources">
+    <CLASSES>
+      <root url="file://D:/jar/spring_jar/jars/slf4j-1.6.2" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://D:/jar/spring_jar/jars/slf4j-1.6.2" />
+    </SOURCES>
+    <jarDirectory url="file://D:/jar/spring_jar/jars/slf4j-1.6.2" recursive="false" />
+    <jarDirectory url="file://D:/jar/spring_jar/jars/slf4j-1.6.2" recursive="false" type="SOURCES" />
+  </library>
+</component>

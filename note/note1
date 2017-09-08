@@ -1,0 +1,91 @@
+18.导入问题没有解决:点击导入没有弹出框展示,导入失败??为什么?
+ 账号唯一性校验失败??计算所有照搬依旧失败????
+
+1.idea中使用request.getContextPath(),一定要引入javax.servlet:javax.servlet-api:3.0.1到global libarary
+
+2.子模块的hbm映射文件一定要放到总的spring配置文件中,hibernate中的hbm映射文件都导入到spring配置中
+
+3.<!--这里一定要重定向提交!重定向跳转到列表,防止表单重复提交-->
+              <!--<result name="actionName" type="redirectAction">user_listUI</result>-->
+              <!--这里配置一定要配置正确,result中的result的name值是指的是action中return的值-->
+              <result name="list" type="redirectAction">
+                  <param name="actionName">user_listUI</param>
+              </result>
+
+ 4.document.forms[0].submit();-------------submit()在此处是事件函数
+
+ 5.<%--引入css,href使用java直接获取--%>,其中<%=request.getContextPath()%>获取的是即为/hh_test(项目名称),
+ 而<%=request.getContextPath()%>/css则相当于用绝对路径直接定位到了webRoot/css
+   <link href="<%=request.getContextPath()%>/css/skin1.css" type="text/css" rel="stylesheet">
+
+ 6.最好把jsp页面放在/WEB-INF下，而jsp页面引入"外部”js,css,images时，必须获取项目的根路径，
+ 再加上/css(或/js 或/images)即使用绝对路径的方法，
+ 而不是相对路径的方法，才能访问到放置在webRoot下的资源！
+
+ 7.org.apache.jasper.JasperException: java.lang.NullPointerException:此时是由于jsp中取生日值时,struts标签未把一个td内容括起来,
+ 导致找不到user实体类的一个生日,造成空指针
+ <s:textfield id="birthday" name="user.birthday" readonly="true"
+                              onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'});"/>
+                 <s:param name="value"><s:date name="user.birthday" format="yyyy-MM-dd"/></s:param>
+                 <%--</s:textfield>--%>
+                 ,修改方法,将第二行/去掉,将<s:param>括起来包括到s:textfield中
+    解决方法:             <s:textfield id="birthday" name="user.birthday" readonly="true"
+                                               onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'});">
+                                  <s:param name="value"><s:date name="user.birthday" format="yyyy-MM-dd"/></s:param>
+                 </s:textfield>
+
+ 8.   org.springframework.dao.InvalidDataAccessApiUsageException:错误原因1,编辑jsp页面中一般都要把id作为隐藏域加入
+        解决方法:<s:hidden id="user.id"></s:hidden>
+        错误原因2:jsp页面中td标签标错位置
+        <tr>
+                    <td class="tdBg" width="200px">生日：</td>
+                    <td>
+                        <s:textfield id="birthday" name="user.birthday" readonly="true"
+                                     onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'});">
+                        <s:param name="value"><s:date name="user.birthday" format="yyyy-MM-dd"/></s:param>
+                        </s:textfield>
+                    </td>
+                    </td>....................................多了这个td
+                </tr>
+         解决方法:<tr>
+                          <td class="tdBg" width="200px">生日：</td>
+                          <td>
+                              <s:textfield id="birthday" name="user.birthday" readonly="true"
+                                           onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'});">
+                              <s:param name="value"><s:date name="user.birthday" format="yyyy-MM-dd"/></s:param>
+                              </s:textfield>
+                          </td>
+                           <!--</td>-->
+                      </tr>
+          错误原因3:可能是引入的js日期组件,在配置时格式问题,不确定
+          <s:textfield id="birthday" name="user.birthday" readonly="true"
+                  onfocus="WdatePicker({'skin':'whyGreen','dateFmt':'yyyy-MM-dd'});"(这里要加一个空格) >
+
+ 9.  导出,打开页面提示"无法打开页面",HSSFSheet sheet = workbook.createSheet("用户列表");createSheet后面要加上导出的列表的名字
+
+ 10.poi中操作单元格样式,垂直居中:cellStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);//垂直居中
+                     水平居中:cellStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER)
+
+ 11.导出action中导出public void exportExcel(),为什么前端jsp页面中window.open(...exportExcel.action)还是打开新的页面,提示"无法打开此页面"??
+ 解决方案:打开project structure,进入artifacts,看右侧列表右侧下是否还有需要的jar包没有放到web-inf下的
+       lib目录下,要有就是缺少的jar包,双击它,解决!
+
+ 12.HSSFSheet sheet = workbook.createSheet("testExcel");testExcel中仅仅是指定表名,不需要添加后缀,只是excel工作簿中的一张表的名字
+
+ 13.java.lang.NoClassDefFoundError: org/apache/poi/ss/usermodel/Workbook
+
+ 14.在for循环外声明了User user=null,在for(){这里面要初始化user,否则报java.lang.NoClassDefFoundError}
+
+ 15.导入的时候,读取工作簿的时候,new workBook(这里一定要加上FileInputStream对象)
+
+ 16.正则表达式"^.+\\.(?i)(xls)$",中间的加号不能少
+
+ 17.Caused by: java.lang.ClassNotFoundException: org.apache.poi.ss.usermodel.Workbook,这个异常就是缺找不到jar包,
+ 解决方法:第一看是否有对应jar包,第二打开project structure,进入artifacts,看右侧列表右侧下是否还有需要的jar包没有放到web-inf下的
+ lib目录下,要有就是缺少的jar包,双击它,解决!
+
+ 19.js中判断账号的唯一性时,提交之前要document.forms[0].submit()
+
+ 20.快捷键ctrl+d,是复制一整行
+
+ 21.项目中常常将需要在session到期限时,保存session,此时可以使类实现序列化,等再访问时通过返序列化再取出

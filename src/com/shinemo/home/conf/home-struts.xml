@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <!--不同的命名空间-->
+    <package name="sysHome-action" namespace="/sys" extends="base-default">
+        <!--action的生成不要交给spring容器-->
+        <action name="home_*" class="com.shinemo.home.action.HomeAction" method="{1}">
+            <result name="{1}">/WEB-INF/jsp/home/{1}.jsp</result>
+            <result name="home">/WEB-INF/jsp/home/home.jsp</result>
+        </action>
+    </package>
+</struts>

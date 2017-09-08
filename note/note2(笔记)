@@ -1,0 +1,157 @@
+1.idea怎样自动生成try/catch代码块
+先选中代码块,然后ctrl+alt+t
+
+2.上传头像时,后台action接收前端jsp时,private File headImg;这个headImg必须是jsp中file表单域中对应名称;
+    后台接收时,action层必须设置file,fileContentType和fileName三个变量来接收前端传来的file类型
+
+3.导出时步骤:1.查找用户列表,2.导出,导出时设置响应头response.setContentType("application/x-excel");
+ response.setHeader("Content-Disposition", "attachment;filename=" + new String("用户列表.xls".getBytes(), "ISO-8859-1"));
+
+ 4.快速生成代码,方法,方法体:快捷键:alt+enter
+
+ 5.新建某个类时,创建类前的注解,在settings-editor-living settings中
+                                                     *.............*号前不要加/
+                                                      * @Description:
+                                                      * @author: guteng
+                                                      * @Param: $params$
+                                                      * @Date:  $date$
+                                                     */
+ 6.window10中切换当前页面和上一个页面使用快捷键:tab+alt
+
+ 7.判断是否以确定的后缀名结尾使用string类型的名字.matches("正则表达式"),返回boolean
+
+ 8.导入时,读取excel表格时,读取工作簿,工作表获取工作行都用get..()方法
+
+ 9.导入excel时,通过通过工作表获取表内行号使用sheet.getPhysicalNumberOfRows()方法
+
+ 10.导入excel时,通过单元格获取单元格的值时,使用方法cell.getString(string类型用string,date类型用date,number类型用number)CellValue();
+
+ 11.jsp中,在input等标签中添加onchange事件,用来鼠标移走后校验输入内容的唯一性,onchange="doVerify()",这里一定要双引号,而且一定要把方法括起来
+
+ 12.jquery中根据id获取标签对象,使用双引号括起来id值,$("#account")
+
+ 13.jquery中用ajax,是使用$.ajax({json串});
+
+ 14.在jsp中js脚本中判断输入值是否为空,用account!="",而不用account!=null
+
+ 15.json串中其中的一个值的写法:$a.ajax=({
+ data:{"user.account":account},也就是说data:后面如果跟的还是一个key和value,那么直接用{},大括号外不要用""了
+ url:"${basePath}nsfw/user_verify.action"
+ })
+
+ 16.action层中从前端用户输入的内容获取字符串账号,后端获取时需要判断前端用户输入的是否为空,只能使用StringUtils.isNotBlank(user.getAccount);
+ 因为不知道前端用户具体输的是空格还是什么也没有输入
+
+ 17.获取输出到浏览器的输出流方法:ServletOutputStream outputStream=response.getOutputStream();
+
+ 18.输出流的通用方法:outputStream.write(str.getBytes()),流可操作的方法是write()方法
+
+ 19.jquery中定焦:在校验账号重复性的时候,弹框提示后定焦到输入框,使用方法是:$("#account").focus();是标签对象.focus()
+
+ 20.js中定义一个变量时true还是false,不要加双引号,var s=false;加上双引号就变成了字符串
+
+ 21.jquery校验输入框中值是否为空,不能直接标签对象是否为空判断,不能这样:var user=$("#user"),不能user=="",应该取标签的value值
+ ,即是:user.val()==""
+
+ 22.客户端非异步,action层向客户端$.ajax传递数据不用使用printwriter,直接使用outpustream(str.getBytes())
+
+ 23.struts中全局配置文件配置全局结果是global-result,全局结果异常映射global-exception-mapping,在异常映射中
+ <exception-mapping result="" exception="">
+
+ 24.action层如果出现了error并且没有抓住,可以通过继承strutsResultSupport类返回结果类型进行特殊处理
+
+ 25.ActionInvocation invocation..这个invocation.getAction()可以获取action对象,只需要进行转义处理到获取具体的action对象
+
+ 27.静态定义常量,将对象的初始化定义都放到static块中
+
+ 28.角色roleId唯一定位通过uuid实现,uuid可以使用string类型实现
+
+ 29.hibernate中获取query对象后,执行查询语句后,执行,方法是:query.excuteUpdate()
+
+ 30.crud常规接口方法,增和改,返回值都是void类型,参数都是实体类,删除和根据id查询参数都是Serializable id类型
+
+ 31.spring在service实现类上的注解@Service("roleService"),那么在action层创建roleservice实例时对象的名字一定要是roleService
+
+ 32.action层中如果只是跳转进入某个页面,方法名称统一都叫..UI(),返回值也是..UI
+
+ 33.action一般是继承actionsupport,所以抽取出来的baseAction是抽象类,不让创建实例化,public abstract class 类名{},注意abstract
+ 放置的位置
+
+ 34.构造函数中,super()一定要放在第一行
+
+ 35.系统中没有异常,但是有错误,可以写一个action来继承strutsActionSupport,处理error信息
+
+ 36.配置hibernate映射文件时一对多,在配置多的一方,即是配置set一方时inverse=true,true代表权利不反转,false代表权利反转
+
+ 37.hibernate配置映射文件,属性的配置,都是<property name="" type=""><column name="" length=""></column></property>,基本都是这个
+ 套路,遵循数据库表的创建步骤,create table ex(id varchar(20) not null...);
+
+ 38.role_id对应的role表里的roleId,关联,通过role_id关联,而不是通过role具体角色关联,所以roleId就是关联着rolePrivilege里面的role_id
+
+ 39.写hql语句查询时,from后面跟的是实体类名,where后面跟的是实体类里面的字段名称来处理
+
+ 40.context:上下文语境,actionContext.getContext.getContextMap.put("","")
+
+ 41.request,session和application在action中的一种获取方法
+ Map request=(Map)ActionContext.getContext().get("request"); (这里session是直接getSession())这个是action中获取request的一种方法,虽然获取的是map类型,但是
+ 传到jsp页面后就自动转换成HttpServletRequest的request,action层request.put("",..),jsp中直接request.getAttribute("")获取值;
+ ,servletActionContext,继承自actionContext,HttpServletRequest request=servletActionContext.getRequest(),
+ 但是能用actionContext尽量用它,少用servletActionContext
+
+ 42.action层中,获取列表页数据,最好初始化一个list对象
+
+ 43.提交新增,是跳转到list列表页面
+
+ 44.角色的粗粒度过滤,一般都是在进入列表页面加载权限集合
+
+ 45.批量删除,被选择的行被批量删除,要遍历被选中的行
+
+ 46.ctrl+r,查找替换的快捷键
+
+ 47.项目中的实体类要实现序列化接口Serializable
+
+ 47.js中document.forms[0].action="路径",document.forms[0].submit;在js直接提交表单
+
+ 48.js在编辑时提交表单会的跳转url会传一个参数是id
+
+ 49.jsp中取项目地址是${}
+
+ 50.struts中的jsp的标签,在复选框标签是<s:checkboxlist />
+
+ 51.编辑页面的jsp页面中别忘了要把id给设置成隐藏域
+
+ 52.联合主键中的Id类要重写hashcode和equals方法
+
+ 53.联合主键要重写hashcode和equals方法,目的是保证唯一性,固定写法
+ @Override
+     public int hashCode() {
+         final int prime = 31;
+         int result = 1;
+         result = prime * result + ((age == null) ? 0 : age.hashCode());
+         result = prime * result + ((id == null) ? 0 : id.hashCode());
+         return result;
+     }
+
+     @Override
+     public boolean equals(Object obj) {
+         if (this == obj)
+             return true;
+         if (obj == null)
+             return false;
+         if (getClass() != obj.getClass())
+             return false;
+         SunDy other = (SunDy) obj;
+         if (age == null) {
+             if (other.age != null)
+                 return false;
+         } else if (!age.equals(other.age))
+             return false;
+         if (id == null) {
+             if (other.id != null)
+                 return false;
+         } else if (!id.equals(other.id))
+             return false;
+         return true;
+     }
+
+ 54.ssh框架项目中的映射文件,统一导入到src或src同级目录下spring.xml配置文件中

@@ -1,0 +1,25 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="shinemoTaxSecond:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/shinemoTaxSecond_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="shinemoTaxSecond/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="shinemoTaxSecond" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="hibernate3" />
+          <element id="library" level="project" name="spring3" />
+          <element id="library" level="project" name="struts2" />
+          <element id="library" level="project" name="log4j" />
+          <element id="library" level="project" name="other" />
+          <element id="library" level="project" name="poi" />
+          <element id="library" level="project" name="slf4j-api-1.6.1-sources" />
+          <element id="library" level="project" name="junit-4.10" />
+          <element id="library" level="project" name="lib" />
+          <element id="library" level="application" name="javax" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>
